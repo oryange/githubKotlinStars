@@ -11,7 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.app.R
-import com.example.app.model.Repository
+import com.example.app.model.RepositoryItem
 import com.example.app.ui.theme.Purple700
 import com.example.app.ui.theme.White
 
@@ -33,10 +33,10 @@ fun RepositoryList(navController: NavController) {
             )
         }
     ) {
-        val list: MutableList<Repository> = mutableListOf(
-        Repository("Kotlin", R.drawable.image_test),
-        Repository("Kotlin for beginners", R.drawable.image_test),
-        Repository("Kotlin from zero to advanced", R.drawable.image_test),
+        val list: MutableList<RepositoryItem> = mutableListOf(
+        RepositoryItem("Kotlin", R.drawable.image_test),
+        RepositoryItem("Kotlin for beginners", R.drawable.image_test),
+        RepositoryItem("Kotlin from zero to advanced", R.drawable.image_test),
         )
         LazyColumn {
             itemsIndexed(list) { position, _ ->

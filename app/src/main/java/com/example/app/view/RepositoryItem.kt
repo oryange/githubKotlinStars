@@ -11,10 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.example.app.model.Repository
+import com.example.app.model.RepositoryItem
 
 @Composable
-fun RepositoryItem(position: Int, list: MutableList<Repository>) {
+fun RepositoryItem(position: Int, list: MutableList<RepositoryItem>) {
     val itemTitle = list[position].name
     val itemImage = list[position].image
     Card(

@@ -6,9 +6,16 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.app.repository.dataRemote.GithubRepositoryImpl
+import com.example.app.service.RetrofitConfig
 import com.example.app.ui.theme.AppTheme
+import com.example.app.util.ResultState
 import com.example.app.view.RepositoryDetail
 import com.example.app.view.RepositoryList
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,3 +35,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+
+
