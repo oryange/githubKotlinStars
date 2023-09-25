@@ -14,19 +14,38 @@ class HomeViewModel(private val githubRepository: GithubRepository) : ViewModel(
 
     private val _repositories = MutableStateFlow<MutableList<RepositoryItem>>(mutableListOf())
     private val repositories: StateFlow<MutableList<RepositoryItem>> = _repositories
+
     // TODO() remove this
     // TODO() implement cash strategy
-    private val defaultValue = mutableListOf(RepositoryItem("",""))
+    private val defaultValue = mutableListOf(
+        RepositoryItem(
+            id = 16,
+            name = "kotlin",
+            image = "https://avatars.githubusercontent.com/u/878437?v=4",
+            author = "afollestad",
+            stargazersCount = 45850,
+            forksCount = 1765
+        )
+    )
 
     fun getRepositories(): Flow<MutableList<RepositoryItem>> {
-        val repositorieList : MutableList<RepositoryItem> = mutableListOf()
+        val repositorieList: MutableList<RepositoryItem> = mutableListOf()
         viewModelScope.launch {
             val response = githubRepository.getRepositories()
             response.let {
                 when (it) {
                     is ResultState.Success -> {
                         it.data.items.map { item ->
-                            repositorieList.add(RepositoryItem(item.name,item.owner.image))
+                            repositorieList.add(
+                                RepositoryItem(
+                                    id = item.id,
+                                    name = item.name,
+                                    image = item.owner.image,
+                                    author = item.owner.author,
+                                    stargazersCount = item.stargazersCount,
+                                    forksCount = item.forksCount
+                                )
+                            )
                         }
                         _repositories.value = repositorieList
                     }
