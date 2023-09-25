@@ -23,6 +23,9 @@ Fique atento para atualizações e novas versões com recursos aprimorados.
 
 ## App na Prática
 
+https://github.com/oryange/githubKotlinStars/assets/80550000/a82f28f9-b160-4722-8b16-bd0167273ebd
+
+
 
 
 
