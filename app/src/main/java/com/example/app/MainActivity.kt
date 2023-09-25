@@ -10,6 +10,7 @@ import com.example.app.repository.dataRemote.GithubRepositoryImpl
 import com.example.app.service.RetrofitConfig
 import com.example.app.ui.theme.AppTheme
 import com.example.app.util.ResultState
+import com.example.app.util.StringUtils
 import com.example.app.view.RepositoryDetail
 import com.example.app.view.RepositoryList
 import kotlinx.coroutines.CoroutineScope
@@ -27,8 +28,8 @@ class MainActivity : ComponentActivity() {
                     composable(route = "repositoryList") {
                         RepositoryList(navController = navController)
                     }
-                    composable(route = "repositoryDetail") {
-                        RepositoryDetail(navController = navController)
+                    composable(route = "repositoryDetail/{title}") { entry->
+                        RepositoryDetail(navController = navController, entry.arguments?.getString("title") ?: StringUtils.EMPTY)
                     }
                 }
             }

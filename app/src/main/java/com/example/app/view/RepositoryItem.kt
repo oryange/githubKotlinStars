@@ -1,7 +1,5 @@
 package com.example.app.view
 
-import android.graphics.Color.BLACK
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,12 +14,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import coil.compose.rememberImagePainter
 import com.example.app.model.RepositoryItem
 
 @Composable
-fun RepositoryItem(position: Int, list: MutableList<RepositoryItem>) {
+fun RepositoryItem(position: Int, list: MutableList<RepositoryItem>, navController: NavController){
     val itemTitle = list[position].name
     val itemImage = list[position].image
     Card(
@@ -29,7 +27,7 @@ fun RepositoryItem(position: Int, list: MutableList<RepositoryItem>) {
             .fillMaxWidth()
             .padding(8.dp)
             .clickable {
-                //navController.navigate("repositoryDetail")
+                navController.navigate("repositoryDetail/$itemTitle")
             }) {
         ConstraintLayout(Modifier.padding(16.dp)) {
             val (title, image) = createRefs()

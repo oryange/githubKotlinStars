@@ -49,7 +49,7 @@ fun RepositoryList(navController: NavController) {
             homeViewModel.getRepositories().collectAsState(mutableListOf()).value
         LazyColumn {
             itemsIndexed(list) { position, _ ->
-                RepositoryItem(position, list)
+                RepositoryItem(position, list, navController)
             }
         }
     }
