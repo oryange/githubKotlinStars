@@ -1,6 +1,7 @@
 package com.example.app.view
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Scaffold
@@ -25,9 +26,9 @@ import com.example.app.view.home.HomeViewModelFactory
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun RepositoryList(navController: NavController) {
+fun RepositoryList(navController: NavController, context: Context) {
     val homeViewModel: HomeViewModel =
-        viewModel(factory = HomeViewModelFactory(GithubRepositoryImpl(RetrofitConfig.getApiService())))
+        viewModel(factory = HomeViewModelFactory(GithubRepositoryImpl(RetrofitConfig.getApiService()), context))
 
 
     Scaffold(

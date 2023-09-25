@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "repositoryList") {
                     composable(route = "repositoryList") {
-                        RepositoryList(navController = navController)
+                        RepositoryList(navController = navController, this@MainActivity)
                     }
                     composable(route = "repositoryDetail/{title}") { entry->
                         RepositoryDetail(navController = navController, entry.arguments?.getString("title") ?: StringUtils.EMPTY)
