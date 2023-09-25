@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">app</string>
+    <string name="top_bar_name">Github Kotlin Stars</string>
 </resources>
