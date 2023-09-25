@@ -1,5 +1,6 @@
 package com.example.app.view
 
+import android.content.Context
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,15 +9,25 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.app.view.repositoryDetail.RepositoryDetailViewModel
+import com.example.app.view.repositoryDetail.RepositoryDetailViewModelFactory
 
 @Composable
-fun RepositoryDetail(navController: NavController, title: String ) {
+fun RepositoryDetail(context: Context, id: String ) {
+    val viewModel: RepositoryDetailViewModel =
+        viewModel(
+            factory = RepositoryDetailViewModelFactory(
+                context
+            )
+        )
+
+    val item = viewModel.getItemRepository(id)
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -29,9 +40,9 @@ fun RepositoryDetail(navController: NavController, title: String ) {
                 .padding(16.dp)
         ) {
             Text(
-                text = "Author: $title",
+                text = "Author: ${item?.author}",
                 style = TextStyle(
-                    fontSize = 16.sp,
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 ),
                 modifier = Modifier
@@ -39,18 +50,18 @@ fun RepositoryDetail(navController: NavController, title: String ) {
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Stargazers: $title",
+                text = "Stargazers: ${item?.stargazersCount}",
                 style = TextStyle(
-                    fontSize = 14.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.Normal
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
             )
             Text(
-                text = "Forks: $title",
+                text = "Forks: ${item?.forksCount}",
                 style = TextStyle(
-                    fontSize = 14.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.Normal
                 ),
                 modifier = Modifier

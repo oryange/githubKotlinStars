@@ -28,8 +28,12 @@ import com.example.app.view.home.HomeViewModelFactory
 @Composable
 fun RepositoryList(navController: NavController, context: Context) {
     val homeViewModel: HomeViewModel =
-        viewModel(factory = HomeViewModelFactory(GithubRepositoryImpl(RetrofitConfig.getApiService()), context))
-
+        viewModel(
+            factory = HomeViewModelFactory(
+                GithubRepositoryImpl(RetrofitConfig.getApiService()),
+                context
+            )
+        )
 
     Scaffold(
         topBar = {

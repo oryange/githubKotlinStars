@@ -1,4 +1,4 @@
-package com.example.app.repository.dataRemote.dataLocal
+package com.example.app.repository.dataLocal
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -3,6 +3,7 @@ package com.example.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -26,10 +27,13 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "repositoryList") {
                     composable(route = "repositoryList") {
-                        RepositoryList(navController = navController, this@MainActivity)
+                        RepositoryList(navController = navController, LocalContext.current)
                     }
-                    composable(route = "repositoryDetail/{title}") { entry->
-                        RepositoryDetail(navController = navController, entry.arguments?.getString("title") ?: StringUtils.EMPTY)
+                    composable(route = "repositoryDetail/{id}") { entry->
+                        RepositoryDetail(
+                            context =  LocalContext.current,
+                            id = entry.arguments?.getString("id") ?: StringUtils.EMPTY
+                        )
                     }
                 }
             }

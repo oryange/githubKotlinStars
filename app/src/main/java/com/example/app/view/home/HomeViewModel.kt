@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.app.model.RepositoryItem
 import com.example.app.repository.dataRemote.GithubRepository
-import com.example.app.repository.dataRemote.dataLocal.RepositoryItemCache
+import com.example.app.repository.dataLocal.RepositoryItemCache
 import com.example.app.util.ResultState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
