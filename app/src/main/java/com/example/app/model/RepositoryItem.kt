@@ -1,6 +1,6 @@
 package com.example.app.model
 
-data class RepositoryItem(
+internal data class RepositoryItem(
     val id : Int,
     val name: String,
     val image: String,

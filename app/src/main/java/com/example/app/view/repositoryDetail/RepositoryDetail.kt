@@ -1,20 +1,26 @@
 package com.example.app.view
 
 import android.content.Context
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
 import com.example.app.view.repositoryDetail.RepositoryDetailViewModel
 import com.example.app.view.repositoryDetail.RepositoryDetailViewModelFactory
 
@@ -39,6 +45,14 @@ fun RepositoryDetail(context: Context, id: String ) {
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
+            AsyncImage(
+                model = item?.image,
+                contentDescription = "repository $item?.image image",
+                modifier = Modifier
+                    .size(100.dp, 100.dp)
+                    .clip(CircleShape)
+                    .border(2.dp, color = Color.Gray)
+            )
             Text(
                 text = "Author: ${item?.author}",
                 style = TextStyle(

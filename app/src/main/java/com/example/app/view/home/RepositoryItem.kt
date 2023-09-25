@@ -22,7 +22,7 @@ import com.example.app.model.RepositoryItem
 
 
 @Composable
-fun RepositoryItem(position: Int, list: MutableList<RepositoryItem>, navController: NavController) {
+internal fun RepositoryItem(position: Int, list: MutableList<RepositoryItem>, navController: NavController) {
     val itemId = list[position].id
     val itemTitle = list[position].name
     val itemImage = list[position].image
@@ -48,7 +48,7 @@ fun RepositoryItem(position: Int, list: MutableList<RepositoryItem>, navControll
                     .border(2.dp, color = Color.Gray)
             )
             Text(
-                text = itemTitle,
+                text = "Repository: $itemTitle",
                 style = TextStyle(
                     fontSize = 24.sp,
                     color = Color.Black

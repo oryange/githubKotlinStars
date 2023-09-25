@@ -1,34 +1,27 @@
 package com.example.app.view.home
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.app.model.RepositoryItem
+import com.example.app.repository.dataLocal.RepositoryItemLocalCacheImpl
 import com.example.app.repository.dataRemote.GithubRepository
-import com.example.app.repository.dataLocal.RepositoryItemCache
 import com.example.app.util.ResultState
+import com.example.app.util.StringUtils.TAG_HOME
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val githubRepository: GithubRepository, private val context: Context) :
-    ViewModel() {
+internal class HomeViewModel(
+    private val githubRepository: GithubRepository,
+    private val context: Context
+) : ViewModel() {
 
     private val _repositories = MutableStateFlow<MutableList<RepositoryItem>>(mutableListOf())
     private val repositories: StateFlow<MutableList<RepositoryItem>> = _repositories
-    private val repositoryItems = RepositoryItemCache(context).getRepositoryItems()
-
-    private val defaultValue = mutableListOf(
-        RepositoryItem(
-            id = 16,
-            name = "kotlin",
-            image = "https://avatars.githubusercontent.com/u/878437?v=4",
-            author = "afollestad",
-            stargazersCount = 45850,
-            forksCount = 1765
-        )
-    )
+    private val repositoryItems = RepositoryItemLocalCacheImpl(context).getRepositoryItems()
 
     fun getRepositories(): Flow<MutableList<RepositoryItem>> {
         if (repositoryItems.isNullOrEmpty()) {
@@ -64,10 +57,10 @@ class HomeViewModel(private val githubRepository: GithubRepository, private val 
                                 )
                             )
                         }
-                        RepositoryItemCache(context).saveRepositoryItems(repositoryList)
+                        RepositoryItemLocalCacheImpl(context).saveRepositoryItems(repositoryList)
                         _repositories.value = repositoryList
                     }
-                    is ResultState.Error -> _repositories.value = defaultValue
+                    is ResultState.Error -> Log.e(TAG_HOME, it.message)
                 }
             }
         }
