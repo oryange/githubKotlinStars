@@ -1,4 +1,4 @@
-package com.example.app.view
+package com.example.app.view.repositoryDetail
 
 import android.content.Context
 import androidx.compose.foundation.border
@@ -25,13 +25,11 @@ import com.example.app.view.repositoryDetail.RepositoryDetailViewModel
 import com.example.app.view.repositoryDetail.RepositoryDetailViewModelFactory
 
 @Composable
-fun RepositoryDetail(context: Context, id: String ) {
-    val viewModel: RepositoryDetailViewModel =
-        viewModel(
-            factory = RepositoryDetailViewModelFactory(
-                context
-            )
-        )
+internal fun RepositoryDetail(
+    repositoryDetailViewModelFactory: RepositoryDetailViewModelFactory,
+    id: String
+) {
+    val viewModel: RepositoryDetailViewModel = viewModel(factory = repositoryDetailViewModelFactory)
 
     val item = viewModel.getItemRepository(id)
     Card(

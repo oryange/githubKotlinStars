@@ -1,7 +1,6 @@
-package com.example.app.view
+package com.example.app.view.home
 
 import android.annotation.SuppressLint
-import android.content.Context
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Scaffold
@@ -16,24 +15,18 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.app.R
 import com.example.app.model.RepositoryItem
-import com.example.app.repository.dataRemote.GithubRepositoryImpl
-import com.example.app.service.RetrofitConfig
 import com.example.app.ui.theme.Purple700
 import com.example.app.ui.theme.White
-import com.example.app.view.home.HomeViewModel
-import com.example.app.view.home.HomeViewModelFactory
+import com.example.app.view.RepositoryItem
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun RepositoryList(navController: NavController, context: Context) {
-    val homeViewModel: HomeViewModel =
-        viewModel(
-            factory = HomeViewModelFactory(
-                GithubRepositoryImpl(RetrofitConfig.getApiService()),
-                context
-            )
-        )
+internal fun RepositoryList(
+    navController: NavController,
+    homeViewModelFactory: HomeViewModelFactory,
+) {
+    val homeViewModel: HomeViewModel = viewModel(factory = homeViewModelFactory)
 
     Scaffold(
         topBar = {

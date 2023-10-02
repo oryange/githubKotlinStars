@@ -1,11 +1,10 @@
 package com.example.app.view.home
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.app.model.RepositoryItem
-import com.example.app.repository.dataLocal.RepositoryItemLocalCacheImpl
+import com.example.app.repository.dataLocal.RepositoryItemLocalCache
 import com.example.app.repository.dataRemote.GithubRepository
 import com.example.app.util.ResultState
 import com.example.app.util.StringUtils.TAG_HOME
@@ -16,12 +15,12 @@ import kotlinx.coroutines.launch
 
 internal class HomeViewModel(
     private val githubRepository: GithubRepository,
-    private val context: Context
+    private val repositoryItemLocalCache: RepositoryItemLocalCache
 ) : ViewModel() {
 
     private val _repositories = MutableStateFlow<MutableList<RepositoryItem>>(mutableListOf())
     private val repositories: StateFlow<MutableList<RepositoryItem>> = _repositories
-    private val repositoryItems = RepositoryItemLocalCacheImpl(context).getRepositoryItems()
+    private val repositoryItems = repositoryItemLocalCache.getRepositoryItems()
 
     fun getRepositories(): Flow<MutableList<RepositoryItem>> {
         if (repositoryItems.isNullOrEmpty()) {
@@ -57,7 +56,7 @@ internal class HomeViewModel(
                                 )
                             )
                         }
-                        RepositoryItemLocalCacheImpl(context).saveRepositoryItems(repositoryList)
+                        repositoryItemLocalCache.saveRepositoryItems(repositoryList)
                         _repositories.value = repositoryList
                     }
                     is ResultState.Error -> Log.e(TAG_HOME, it.message)

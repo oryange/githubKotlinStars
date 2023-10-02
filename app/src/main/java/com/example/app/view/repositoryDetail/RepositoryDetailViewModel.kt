@@ -1,12 +1,13 @@
 package com.example.app.view.repositoryDetail
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.example.app.model.RepositoryItem
-import com.example.app.repository.dataLocal.RepositoryItemLocalCacheImpl
+import com.example.app.repository.dataLocal.RepositoryItemLocalCache
 
-internal class RepositoryDetailViewModel(private val context: Context) : ViewModel() {
+internal class RepositoryDetailViewModel(
+    private val repositoryItemLocalCache: RepositoryItemLocalCache
+) : ViewModel() {
 
     fun getItemRepository(itemId: String): RepositoryItem? =
-        RepositoryItemLocalCacheImpl(context).getRepositoryItemById(itemId)
+        repositoryItemLocalCache.getRepositoryItemById(itemId)
 }
