@@ -38,7 +38,7 @@ internal fun RepositoryDetailsScreen(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(it),
             elevation = 8.dp
         ) {
             when (state) {
